@@ -20,7 +20,7 @@ class OpenFileInCursorCommand(sublime_plugin.TextCommand):
 
     def _run_async(self):
         try:
-            subprocess.run(["cursor", "--version"], check=True)
+            subprocess.check_call(["cursor", "--version"])
         except (subprocess.SubprocessError, FileNotFoundError):
             sublime.error_message("cursor: command not found\n\nPlease verify that it is installed and in your PATH.")
             return
@@ -37,9 +37,9 @@ class OpenFileInCursorCommand(sublime_plugin.TextCommand):
                 else:
                     cmd = ["cursor", "-n", file_path]
                     
-                subprocess.run(cmd, check=True)
-                sublime.status_message(f"Opened file in Cursor: {file_path}")
+                subprocess.check_call(cmd)
+                sublime.status_message("Opened file in Cursor: {}".format(file_path))
             except Exception as e:
-                sublime.error_message(f"Error opening file in Cursor: {str(e)}")
+                sublime.error_message("Error opening file in Cursor: {}".format(str(e)))
         else:
             sublime.error_message("No valid file selected to open in Cursor.")
