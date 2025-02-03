@@ -3,12 +3,14 @@ import sublime_plugin
 import subprocess
 import os
 
+
 class OpenFileInCursorCommand(sublime_plugin.TextCommand):
     """Opens the current file in Cursor editor.
-    
+
     If a project folder is available, opens with project context.
     Otherwise opens just the single file in a new window.
     """
+
     def is_enabled(self):
         return bool(self.view.file_name())
 
@@ -22,7 +24,9 @@ class OpenFileInCursorCommand(sublime_plugin.TextCommand):
         try:
             subprocess.check_call(["cursor", "--version"])
         except (subprocess.SubprocessError, FileNotFoundError):
-            sublime.error_message("cursor: command not found\n\nPlease verify that it is installed and in your PATH.")
+            sublime.error_message(
+                "cursor: command not found\n\nPlease verify that it is installed and in your PATH."
+            )
             return
 
         file_path = self.view.file_name()
@@ -36,7 +40,7 @@ class OpenFileInCursorCommand(sublime_plugin.TextCommand):
                     cmd = ["cursor", "-n", "--folder-uri", project_path, file_path]
                 else:
                     cmd = ["cursor", "-n", file_path]
-                    
+
                 subprocess.check_call(cmd)
                 sublime.status_message("Opened file in Cursor: {}".format(file_path))
             except Exception as e:
