@@ -8,7 +8,15 @@ I consider Sublime Text to be a text editor, not an IDE. I do not want to turn i
 
 This plugin allows you to open the current file in Cursor. If a project folder is available, opens with project context. Otherwise opens just the single file in a new window.
 
+## Usage
+
+Command Palette: `Open in Cursor`
+
 ## Requirements
 
 - Sublime Text 4
 - [Cursor](https://www.trycursor.com)
+
+## Installation
+
+[Package Control](https://packagecontrol.io/packages/Open%20In%20Cursor)
